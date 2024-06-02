@@ -1,12 +1,14 @@
 # EzDida
 
-EzDida是一个基于滴答清单的后台服务,方便通过滴答清单的收集箱快速添加笔记到Workflowy。
+EzDida是一个基于滴答清单的后台服务,方便通过滴答清单来快速添加笔记到Workflowy。
+
+这里滴答清单只作为通道，转移到WF后，会自动删除滴答清单中原有的任务。
 
 ## 使用效果
 
-手机上通过滴答清单来快速收集
+手机上有2种方式借助滴答清单来快速收集
 
-1.通过滴答清单的微信机器热收集笔记
+1.通过滴答清单的微信机器人收集笔记
 
 ![](https://yupic.oss-cn-shanghai.aliyuncs.com/telegram-cloud-photo-size-5-6260400749796245667-y.jpg?x-oss-process=image/resize,w_200,limit_0)
 
