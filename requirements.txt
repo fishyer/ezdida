@@ -1,0 +1,6 @@
+APScheduler==3.10.4
+pydantic==1.10.8
+python-dotenv==1.0.1
+Requests==2.32.3
+urllib3==1.26.16
+wfapi==0.8.1
