@@ -1,7 +1,7 @@
 from apscheduler.schedulers.background import BackgroundScheduler
 import time
 from ezlogger import print, logger
-from main import dida2wf, initwf
+from main_executor import dida2wf, initwf
 
 
 def main():
