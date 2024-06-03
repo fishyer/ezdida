@@ -2,29 +2,35 @@
 from webdav4.client import Client
 import os
 import env_client
-from ezlogger import print, debug, error, warning, info
-import logging
 
-# 设置日志级别为DEBUG
-logging.basicConfig(level=logging.DEBUG)
+from ezlogger import print, debug, info, error, warning, info, logger
 
 client = Client(
     base_url=env_client.webdav_hostname,
     auth=(env_client.webdav_username, env_client.webdav_password),
 )
 
+remote_folder = "clipper"
 
-def ls():
+
+def check_remote_folder():
     # 尝试列出根目录下的文件和文件夹，以验证登录是否成功
     try:
         files = client.ls("/")
-        # print("文件和文件夹列表：", files)
         for file in files:
-            print(file["name"], file["href"], file["type"])
-            if file["name"] == "clipper":
-                print("找到了 clipper 文件夹")
+            # print(file["name"], file["href"], file["type"])
+            print(f"文件 {file['name']} {file['href']} {file['type']}")
+            if file["name"] == remote_folder:
+                print(f"找到了 {remote_folder} 文件夹")
+                return True
+        print(f"未找到 {remote_folder} 文件夹，尝试创建")
+        client.mkdir(remote_folder)
+        print(f"创建 {remote_folder} 文件夹成功")
+        return True
     except Exception as e:
-        print("ls错误:", e)
+        error(f"check_remote_folder错误")
+        logger.exception(e)
+        return False
 
 
 def upload_file(local_path, remote_path):
@@ -59,6 +65,10 @@ def sync_files_to_webdav(local_path, remote_path):
 
         for d in dirs:
             sync_files_to_webdav(os.path.join(root, d), remote_path)
+
+
+result = check_remote_folder()
+info(f"检查缓存文件夹结果: {result}")
 
 
 def main():

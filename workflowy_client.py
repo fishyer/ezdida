@@ -58,7 +58,7 @@ def process_dida_task(inbox, task: DidaTask):
         node = add(inbox, dida_title, dida_url)
         # 删除滴答清单任务
         dida_client.delete_task(
-            env_client.DIDA_ACCESS_TOKEN, env_client.DIDA_INBOX_ID, task.id
+            env_client.dida_access_token, env_client.dida_inbox_id, task.id
         )
         return node
     else:
@@ -96,14 +96,15 @@ def process_workflowy_node(node: Node):
         # 写入本地文件
         simple_title = jina_client.sanitize_title_for_filename(dida_title)
         local_path = f"cache/md/{env_client.webdav_username}/{simple_title}.md"
+        local_folder = os.path.dirname(local_path)
         # 先检查本地缓存目录是否存在，不存在则创建
-        if not os.path.exists("cache/md/"):
-            os.makedirs("cache/md/", exist_ok=True)
+        if not os.path.exists(local_folder):
+            os.makedirs(local_folder, exist_ok=True)
         # 再检查本地缓存文件是否存在，存在则跳过
         if os.path.exists(local_path):
             info(f"Local cache file {local_path} exists, skip.")
             return
-        remote_path = f"/clipper/{simple_title}.md"
+        remote_path = f"/{jianguoyun_client.remote_folder}/{simple_title}.md"
         with open(local_path, "w") as f:
             f.write(fm_content)
         jianguoyun_client.upload_file(local_path, remote_path)
@@ -159,13 +160,13 @@ def re_match_url(text):
 @decorator_util.trace_exception
 @decorator_util.trace_retry(3, 5)
 def get_wf():
-    wf = Workflowy(sessionid=env_client.WF_SESSION_ID)
+    wf = Workflowy(sessionid=env_client.wf_session_id)
     return wf
 
 
 def get_dida_inbox(wf: Workflowy):
     root = wf.root
-    inbox_name = env_client.WF_INBOX_NAME
+    inbox_name = env_client.wf_inbox_name
     for child in root:
         if child.name == inbox_name:
             info(f"Inbox exists: {child.name}")
@@ -178,7 +179,7 @@ def get_dida_inbox(wf: Workflowy):
 
 def dida2wf():
     inbox_tasks = dida_client.get_project_by_id(
-        env_client.DIDA_ACCESS_TOKEN, env_client.DIDA_INBOX_ID
+        env_client.dida_access_token, env_client.dida_inbox_id
     )
     info(f"Inbox Tasks: {len(inbox_tasks)}")
     for i, task in enumerate(inbox_tasks):
@@ -199,7 +200,7 @@ def wf2ob():
     node_set = set()
     full_nodes = get_nodes(inbox, nodes, node_set, recursion=True)
     info(
-        f"Got Normal Node Count: {len(full_nodes)} from Workflowy[inbox] {env_client.WF_INBOX_NAME}. len(completed_node_set)= {len(completed_node_set)}"
+        f"Got Normal Node Count: {len(full_nodes)} from Workflowy[inbox] {env_client.wf_inbox_name}. len(completed_node_set)= {len(completed_node_set)}"
     )
     for node in full_nodes:
         process_workflowy_node(node)

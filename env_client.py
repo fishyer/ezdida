@@ -17,17 +17,17 @@ ob_vault = os.getenv("ob_vault")
 print(f"ob_vault: {ob_vault}")
 
 
-DIDA_ACCESS_TOKEN = os.getenv("DIDA_ACCESS_TOKEN")
-print(f"DIDA_ACCESS_TOKEN: {DIDA_ACCESS_TOKEN}")
+dida_access_token = os.getenv("dida_access_token")
+print(f"dida_access_token: {dida_access_token}")
 
-DIDA_INBOX_ID = os.getenv("DIDA_INBOX_ID")
-print(f"DIDA_INBOX_ID: {DIDA_INBOX_ID}")
+dida_inbox_id = os.getenv("dida_inbox_id")
+print(f"dida_inbox_id: {dida_inbox_id}")
 
-WF_SESSION_ID = os.getenv("WF_SESSION_ID")
-print(f"WF_SESSION_ID: {WF_SESSION_ID}")
+wf_session_id = os.getenv("wf_session_id")
+print(f"wf_session_id: {wf_session_id}")
 
-WF_INBOX_NAME = os.getenv("WF_INBOX_NAME")
-print(f"WF_INBOX_NAME: {WF_INBOX_NAME}")
+wf_inbox_name = os.getenv("wf_inbox_name")
+print(f"wf_inbox_name: {wf_inbox_name}")
 
 webdav_hostname = os.getenv("webdav_hostname")
 print(f"webdav_hostname: {webdav_hostname}")
