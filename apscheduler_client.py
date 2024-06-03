@@ -1,17 +1,35 @@
 from apscheduler.schedulers.background import BackgroundScheduler
 import time
-from ezlogger import print, logger
-from main_executor import dida2wf, initwf
+from ezlogger import print, debug, error, warning, info
+from workflowy_client import init_wf, refresh_inbox, dida2wf, wf2ob
+import logging
+
+# 设置日志级别为DEBUG
+logging.basicConfig(level=logging.DEBUG)
+
+execute_count = 0
+
+
+def execute_job():
+    global execute_count
+    execute_count += 1
+    info(f"execute_count: {execute_count}")
+    dida2wf()
+    # 每执行6次dida2wf后，就执行1次wf2ob,干掉漏网之鱼
+    if execute_count % 6 == 0:
+        refresh_inbox()
+        wf2ob()
 
 
 def main():
     print(__file__)
-    initwf()
+    init_wf()
+    refresh_inbox()
     # 先执行一次
-    dida2wf()
+    execute_job()
     # 创建后台调度器,间隔10秒钟执行一次
     scheduler = BackgroundScheduler()
-    scheduler.add_job(dida2wf, "cron", second="*/10")
+    scheduler.add_job(execute_job, "cron", second="*/10")
     scheduler.start()
     try:
         while True:

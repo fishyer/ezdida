@@ -3,11 +3,11 @@ import logging
 
 # 创建Logger对象
 logger = logging.getLogger()
-logger.setLevel(logging.INFO)  # 设置日志记录级别为INFO
+logger.setLevel(logging.DEBUG)  # 设置日志记录级别为INFO
 
 # 创建FileHandler用于输出到文件
 file_handler = logging.FileHandler("app.log")
-file_handler.setLevel(logging.INFO)  # 设置文件日志记录级别为INFO
+file_handler.setLevel(logging.DEBUG)  # 设置文件日志记录级别为DEBUG
 
 # 创建StreamHandler用于输出到控制台
 console_handler = logging.StreamHandler(sys.stdout)
@@ -23,4 +23,8 @@ logger.addHandler(file_handler)
 logger.addHandler(console_handler)
 
 # 定义日志输出函数
-print = logger.info
+print = logger.debug
+debug = logger.debug
+info = logger.info
+warning = logger.warning
+error = logger.error
