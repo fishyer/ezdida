@@ -2,8 +2,11 @@
 from webdav4.client import Client
 import os
 import env_client
-
 from ezlogger import print, debug, info, error, warning, info, logger
+import logging
+
+# 设置日志级别为DEBUG
+logging.basicConfig(level=logging.DEBUG)
 
 client = Client(
     base_url=env_client.webdav_hostname,
