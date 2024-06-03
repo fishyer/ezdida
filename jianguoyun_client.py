@@ -8,12 +8,10 @@ import logging
 # 设置日志级别为DEBUG
 logging.basicConfig(level=logging.DEBUG)
 
-# 定义连接参数
-options = {
-    "webdav_hostname": "https://dav.jianguoyun.com/dav/",
-    "webdav_login": "630709658@qq.com",
-    "webdav_password": "a5dk6vy3wdr6jnfh",
-}
+client = Client(
+    base_url=env_client.webdav_hostname,
+    auth=(env_client.webdav_username, env_client.webdav_password),
+)
 
 
 def ls():
@@ -29,31 +27,12 @@ def ls():
         print("ls错误:", e)
 
 
-client = Client(
-    base_url="https://dav.jianguoyun.com/dav/",
-    auth=("630709658@qq.com", "a5dk6vy3wdr6jnfh"),
-)
-
-local_path = "cache/md/test-0603-2.md"
-remote_path = "/inbox/test-0603-2.md"
-
-
 def upload_file(local_path, remote_path):
     try:
         client.upload_file(from_path=local_path, to_path=remote_path, overwrite=False)
         print(f"文件 {local_path} 已成功上传到 {remote_path}")
     except Exception as e:
         print("上传失败，错误:", e)
-
-
-def sync_folder():
-    try:
-        files = client.ls("/inbox")
-        for i, file in enumerate(files):
-            # file["name"], file["href"], file["type"]
-            print(f"{i+1}. {file['name']}  {file['href']}  {file['type']}")
-    except Exception as e:
-        print("同步失败，错误:", e)
 
 
 def sync_files_to_webdav(local_path, remote_path):
@@ -84,6 +63,8 @@ def sync_files_to_webdav(local_path, remote_path):
 
 def main():
     print(__file__)
+    # local_path = "cache/md/test-0603-2.md"
+    # remote_path = "/inbox/test-0603-2.md"
     # sync_folder()
     # sync_files_to_webdav("cache/md", "/clipper")
 
