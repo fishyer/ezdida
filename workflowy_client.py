@@ -26,7 +26,8 @@ def get_nodes(inbox: Node, nodes, node_set, recursion=True):
         if i.name not in node_set:
             print(f"Normal Node: {i.name}, {i.description}, {i.is_completed}")
             node_set.add(i.name)
-            nodes.append(i)
+            if not i.is_completed:
+                nodes.append(i)
             # 处理子节点
             if recursion:
                 if i.name.startswith("BookMark-") or i.name.startswith("MarkSearch-"):
