@@ -13,7 +13,7 @@ execute_count = 0
 def execute_job():
     global execute_count
     execute_count += 1
-    info(f"execute_count: {execute_count}")
+    info(f"execute_count: {execute_count} remainder: {execute_count % 6}")
     dida2wf()
     # 每执行6次dida2wf后，就执行1次wf2ob,干掉漏网之鱼
     if execute_count % 6 == 0:

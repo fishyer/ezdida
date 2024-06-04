@@ -107,12 +107,12 @@ def process_workflowy_node(node: Node):
         remote_path = f"/{jianguoyun_client.remote_folder}/{simple_title}.md"
         with open(local_path, "w") as f:
             f.write(fm_content)
-        jianguoyun_client.upload_file(local_path, remote_path)
-        # 借助obsidian插件Local REST API来新建笔记文件
-        # generate_obsidian_note(simple_title, fm_content)
-        add(node, obsidian_link)
-        node.complete()
-        completed_node_set.add(node.name)
+        if jianguoyun_client.upload_file(local_path, remote_path):
+            # 借助obsidian插件Local REST API来新建笔记文件
+            # generate_obsidian_note(simple_title, fm_content)
+            add(node, obsidian_link)
+            node.complete()
+            completed_node_set.add(node.name)
     else:
         info(f"No url to generate obsidian note in {node.name} {dida_title} {dida_url}")
 

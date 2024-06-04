@@ -40,8 +40,10 @@ def upload_file(local_path, remote_path):
     try:
         client.upload_file(from_path=local_path, to_path=remote_path, overwrite=False)
         print(f"文件 {local_path} 已成功上传到 {remote_path}")
+        return True
     except Exception as e:
         print("上传失败，错误:", e)
+        return False
 
 
 def sync_files_to_webdav(local_path, remote_path):
