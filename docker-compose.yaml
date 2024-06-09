@@ -11,6 +11,12 @@ services:
   server:
     build:
       context: .
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        loki-external-labels: "app=ezdida,env=dev"
+
 # docker-compose up -d --build
 
 # The commented out section below is an example of how to define a PostgreSQL
