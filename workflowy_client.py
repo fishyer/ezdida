@@ -83,7 +83,7 @@ def process_workflowy_node(node: Node):
     dida_title, dida_url = preprocess(node.name, node.description)
     # print(f"Processing node: {node.name} {dida_title} {dida_url}")
     if dida_url:
-        info(f"Generating obsidian note for {dida_title} with url {dida_url}...")
+        info(f"✅Process {dida_title} {dida_url}...")
         # 获取Jina的markdown内容
         jina_title, jina_url, content = jina_client.get_markdown_by_url(dida_url)
         # 添加ob笔记
@@ -115,6 +115,9 @@ def process_workflowy_node(node: Node):
             add(node, obsidian_link)
             node.complete()
             completed_node_set.add(node.name)
+            info(f"🎉Success {dida_title} {dida_url} to upload to cloudreve.")
+        else:
+            warning(f"😂Failed {dida_title} {dida_url} to upload to cloudreve.")
     else:
         info(f"No url to generate obsidian note in {node.name} {dida_title} {dida_url}")
 
