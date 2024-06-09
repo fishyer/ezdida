@@ -103,9 +103,12 @@ def process_workflowy_node(node: Node):
         if not os.path.exists(local_folder):
             os.makedirs(local_folder, exist_ok=True)
         # 再检查本地缓存文件是否存在，存在则跳过
-        # if os.path.exists(local_path):
-        #     info(f"Local cache file {local_path} exists, skip.")
-        #     return
+        if os.path.exists(local_path):
+            info(f"Local cache file {local_path} exists, skip.")
+            add(node, obsidian_link)
+            node.complete()
+            completed_node_set.add(node.name)
+            return
         remote_path = f"/{cloudreve_client.remote_folder}/{simple_title}.md"
         with open(local_path, "w") as f:
             f.write(fm_content)
