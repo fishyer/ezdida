@@ -37,3 +37,12 @@ print(f"webdav_username: {webdav_username}")
 
 webdav_password = os.getenv("webdav_password")
 print(f"webdav_password: {webdav_password}")
+
+cd_hostname = os.getenv("cd_hostname")
+print(f"cd_hostname: {cd_hostname}")
+
+cd_username = os.getenv("cd_username")
+print(f"cd_username: {cd_username}")
+
+cd_password = os.getenv("cd_password")
+print(f"cd_password: {cd_password}")

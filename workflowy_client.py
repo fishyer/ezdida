@@ -12,6 +12,7 @@ import os
 import env_client
 import jina_client
 import jianguoyun_client
+import cloudreve_client
 
 
 # 禁止显示urllib3库发出的关于不安全请求的警告信息
@@ -104,10 +105,10 @@ def process_workflowy_node(node: Node):
         if os.path.exists(local_path):
             info(f"Local cache file {local_path} exists, skip.")
             return
-        remote_path = f"/{jianguoyun_client.remote_folder}/{simple_title}.md"
+        remote_path = f"/{cloudreve_client.remote_folder}/{simple_title}.md"
         with open(local_path, "w") as f:
             f.write(fm_content)
-        if jianguoyun_client.upload_file(local_path, remote_path):
+        if cloudreve_client.upload_file(local_path, remote_path):
             # 借助obsidian插件Local REST API来新建笔记文件
             # generate_obsidian_note(simple_title, fm_content)
             add(node, obsidian_link)
