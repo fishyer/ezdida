@@ -11,9 +11,10 @@ from ezlogger import print, debug, error, warning, info
 import os
 import env_client
 import jina_client
-import jianguoyun_client
 import cloudreve_client
+import shutil
 
+# import jianguoyun_client
 
 # 禁止显示urllib3库发出的关于不安全请求的警告信息
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -213,6 +214,11 @@ def init_wf():
     info("Start to connect to Workflowy...")
     wf = get_wf()
     info("Connected to Workflowy.")
+    # 每次重启后,都删除本地缓存文件夹
+    local_cache_folder = "cache/md"
+    if os.path.exists(local_cache_folder):
+        info(f"After each restart , Delete local cache folder {local_cache_folder}...")
+        shutil.rmtree(local_cache_folder)
 
 
 def refresh_inbox():
