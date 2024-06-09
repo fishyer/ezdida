@@ -15,8 +15,8 @@ def execute_job():
     execute_count += 1
     info(f"execute_count: {execute_count} remainder: {execute_count % 6}")
     dida2wf()
-    # 每执行6次dida2wf后，就执行1次wf2ob,干掉漏网之鱼
-    if execute_count % 6 == 0:
+    # 每执行5次dida2wf后，就执行1次wf2ob,干掉漏网之鱼
+    if execute_count % 5 == 0:
         refresh_inbox()
         wf2ob()
 
