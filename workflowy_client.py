@@ -97,15 +97,15 @@ def process_workflowy_node(node: Node):
         fm_content = frontmatter.dumps(post)
         # 写入本地文件
         simple_title = jina_client.sanitize_title_for_filename(dida_title)
-        local_path = f"cache/md/{env_client.webdav_username}/{simple_title}.md"
+        local_path = f"cache/md/{env_client.cd_username}/{simple_title}.md"
         local_folder = os.path.dirname(local_path)
         # 先检查本地缓存目录是否存在，不存在则创建
         if not os.path.exists(local_folder):
             os.makedirs(local_folder, exist_ok=True)
         # 再检查本地缓存文件是否存在，存在则跳过
-        if os.path.exists(local_path):
-            info(f"Local cache file {local_path} exists, skip.")
-            return
+        # if os.path.exists(local_path):
+        #     info(f"Local cache file {local_path} exists, skip.")
+        #     return
         remote_path = f"/{cloudreve_client.remote_folder}/{simple_title}.md"
         with open(local_path, "w") as f:
             f.write(fm_content)

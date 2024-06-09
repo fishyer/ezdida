@@ -1,7 +1,7 @@
 APScheduler==3.10.4
 arrow==1.2.3
 bookmarks_converter==0.3.5
-fish_util==1.0.34
+fish_util==1.0.36
 pydantic==1.10.8
 python-dotenv==1.0.1
 python_frontmatter==1.1.0
@@ -10,3 +10,4 @@ Requests==2.32.3
 urllib3==1.26.16
 webdav4==0.9.8
 wfapi==0.8.1
+loguru==0.7.2

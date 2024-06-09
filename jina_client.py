@@ -6,7 +6,7 @@ import yaml
 import bookmark_client
 import markdown_client as md_client
 import random
-import fish_util.util.time_util as time_util
+import fish_util.src.time_util as time_util
 import fish_util.src.file_util as file_util
 
 # import aiohttp
