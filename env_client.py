@@ -46,3 +46,6 @@ print(f"cd_username: {cd_username}")
 
 cd_password = os.getenv("cd_password")
 print(f"cd_password: {cd_password}")
+
+cd_user_password = os.getenv("cd_user_password")
+print(f"cd_user_password: {cd_user_password}")
