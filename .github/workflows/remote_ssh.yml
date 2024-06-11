@@ -1,0 +1,31 @@
+name: SSH Remote Commands on Main Branch
+
+on:
+  push:
+    branches:
+      - fishyer
+
+jobs:
+  ssh-remote-commands:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Executing remote SSH commands using password on specific port
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        port: ${{ secrets.SSH_PORT }}
+        username: ${{ secrets.SSH_USERNAME }}
+        password: ${{ secrets.SSH_PASSWORD }}
+        script: |
+          echo "Start Remote SSH commands"
+          if [ -d "/app/ezdida" ]; then
+            echo "ezdida文件夹存在，进入文件夹并执行git pull"
+            cd /app/ezdida || exit
+            git pull -f origin fishyer
+          else
+            echo "ezdida文件夹不存在，执行git clone"
+            git clone git@github.com:fishyer/ezdida.git /app/ezdida
+          fi
+          cd /app/ezdida || exit
+          sh .husky/post-push.sh
+          echo "Stop Remote SSH commands"

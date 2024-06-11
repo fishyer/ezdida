@@ -1,0 +1,16 @@
+#!/bin/bash
+source .husky/template.sh
+
+# shellcheck disable=SC2034
+start_time=$(date +%s)
+log "✅Running pre-commit hook..."
+
+source .husky/shell/config-update-3.sh
+log "pre-commit config: $build_version"
+
+# task done
+ent_time=$(date +%s)
+log "🎉Success pre-commit hook. Time elapsed: $((ent_time-start_time))s"
+
+# MajorVersion.MinorVersion.PatchVersion
+# pre-commit: 更新build_config.yaml文件,将第3段的PatchVersion+1

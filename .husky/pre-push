@@ -1,0 +1,28 @@
+#!/bin/bash
+source ./.husky/shell/config-read.sh
+
+# shellcheck disable=SC2034
+start_time=$(date +%s)
+log "✅Running pre-push hook..."
+
+# 如果build_mode为preview，则不执行push操作，就退出执行 1 2 3 4 5
+# log "Configuring: build_type=$build_type"
+# if [ "$build_type" = "preview" ]; then
+#     log "🚫Skip $tag for preview version."
+#     # exit 1 2>/dev/null
+# else
+#     sh ./.husky/shell/build.sh
+#     ent_time=$(date +%s)
+#     log "🎉Success $tag. Time elapsed: $((ent_time - start_time))s"
+#     # exit 1 2>/dev/null
+# fi
+# sh ./.husky/shell/docker-commit.sh
+# sh ./.husky/shell/docker-push.sh
+
+# done
+ent_time=$(date +%s)
+echo "$0 执行完成,耗时：$((ent_time-start_time))s"
+
+# git push -f origin fishyer --no-verify 
+# pre-push: 执行build.sh,生成构建产物. 将第2段的MinorVersion+1,并归零第3段的PatchVersion 1 2 3
+# ps aux | grep git | grep -v grep | awk '{print $2}' | xargs kill

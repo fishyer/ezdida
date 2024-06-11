@@ -1,0 +1,22 @@
+#!/bin/bash
+source ./.husky/shell/config-read.sh
+
+# shellcheck disable=SC2034
+start_time=$(date +%s)
+log "✅Running post-commit hook..."
+
+# shellcheck disable=SC1091
+log "post-commit version: $build_version"
+
+commit_hash=$(git rev-parse HEAD)  
+log "Commit hash: $commit_hash"
+commit_message=$(git log -1 --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset')
+log "Commit message: $commit_message"
+
+# shellcheck disable=SC2093
+exec git tag -a "v$build_version" "$commit_hash" -m "v$build_version"
+
+ent_time=$(date +%s)
+log "🎉Success post-commit hook. Time elapsed: $((ent_time-start_time))s"
+
+# post-commit: 打印提交信息，打版本tag
