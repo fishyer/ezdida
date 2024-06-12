@@ -11,6 +11,7 @@ services:
   server:
     build:
       context: .
+    restart: always
     # logging:
     #   driver: loki
     #   options:
