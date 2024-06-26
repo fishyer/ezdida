@@ -5,7 +5,7 @@ source ./.husky/shell/config-read.sh
 public_ip=$(curl ifconfig.me)
 
 # 将.env.prod文件中的"127.0.0.1"替换为公网IP地址，并保存到.env文件
-# sed "s/127.0.0.1/$public_ip/g" env/prod.env > .env
+sed "s/127.0.0.1/$public_ip/g" env/prod.env > .env
 
 
 # 获取当前项目目录
