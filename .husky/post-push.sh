@@ -17,4 +17,4 @@ ent_time=$(date +%s)
 log "🎉Success post-push hook. Time elapsed: $((ent_time-start_time))s"
 
 # post-push: 在远程服务器上执行shell脚本 2
-# git push -f -u origin fishyer --no-verify 
+# git push -f -u --tags origin fishyer --no-verify 
