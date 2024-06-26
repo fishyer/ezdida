@@ -4,10 +4,10 @@ source ./.husky/shell/config-read.sh
 input_file="./docker-compose.yaml"
 
 # 修改目录权限
-dir_name=$(dirname "$0")
-echo "Current directory: $dir_name"
-chmod -R 777 $dir_name/php
-chmod 644 $dir_name/mysql/my.cnf
+# dir_name=$(dirname "$0")
+# echo "Current directory: $dir_name"
+# chmod -R 777 $dir_name/php
+# chmod 644 $dir_name/mysql/my.cnf
 
 # 构建本地镜像
 docker-compose -f $input_file build

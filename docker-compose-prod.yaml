@@ -16,7 +16,7 @@ services:
     #     loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
     #     loki-external-labels: "app=ezdida,env=dev"
 
-    image: 104.168.59.18:25080/library/ezdida-server:2.1.4
+    image: 104.168.59.18:25080/library/ezdida-server:2.1.5
 # docker-compose up -d --build
 # The commented out section below is an example of how to define a PostgreSQL
 # database that your application can use. `depends_on` tells Docker Compose to
