@@ -1,4 +1,5 @@
 #!/bin/bash
+
 source ./.env
 
 # tag是脚本名称
@@ -22,6 +23,13 @@ exec() {
   log "post-exec $command"
 }
 
+view() {
+  local command="$*"  
+  log "$command" 
+  # eval "$command"
+  # log "post-exec $command"
+}
+
 
 test(){
     # shellcheck disable=SC2034
@@ -37,8 +45,10 @@ test(){
     log "$0 执行完成,耗时：$((ent_time - start_time))s"
 }
 
-if [ "$(basename "$0")" == "template.sh" ]; then
-    log "直接执行: $(basename "$0")"
-else
-    log "导入执行: $(basename "$0")"
-fi
+# if [ "$(basename "$0")" == "template.sh" ]; then
+#     log "直接执行: $(basename "$0")"
+# else
+#     log "导入执行: $(basename "$0")"
+# fi
+
+# test 1

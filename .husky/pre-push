@@ -5,23 +5,16 @@ source ./.husky/shell/config-read.sh
 start_time=$(date +%s)
 log "✅Running pre-push hook..."
 
-# 如果build_mode为preview，则不执行push操作，就退出执行 1 2 3 4 5
-# log "Configuring: build_type=$build_type"
-# if [ "$build_type" = "preview" ]; then
-#     log "🚫Skip $tag for preview version."
-#     # exit 1 2>/dev/null
-# else
-#     sh ./.husky/shell/build.sh
-#     ent_time=$(date +%s)
-#     log "🎉Success $tag. Time elapsed: $((ent_time - start_time))s"
-#     # exit 1 2>/dev/null
-# fi
-# sh ./.husky/shell/docker-commit.sh
-# sh ./.husky/shell/docker-push.sh
+source ./.husky/shell/config-read.sh
+log "pre-push config: $build_type $build_version $build_time"
+
+# 后续可以考虑在pre-push中,在本地生成docker镜像,并推送到远程仓库,以实现远程部署
+log "Build docker-compose.yaml"
+sh ./.husky/shell/compose-build.sh
 
 # done
 ent_time=$(date +%s)
-echo "$0 执行完成,耗时：$((ent_time-start_time))s"
+log "🎉Success pre-push hook. Time elapsed: $((ent_time-start_time))s"
 
 # git push -f origin fishyer --no-verify 
 # pre-push: 执行build.sh,生成构建产物. 将第2段的MinorVersion+1,并归零第3段的PatchVersion 1 2 3

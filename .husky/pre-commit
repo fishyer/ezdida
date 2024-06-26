@@ -1,16 +1,19 @@
 #!/bin/bash
-source .husky/template.sh
+source ./.husky/template.sh
 
-# shellcheck disable=SC2034
+rm -rf .husky/log
+
 start_time=$(date +%s)
 log "✅Running pre-commit hook..."
 
-source .husky/shell/config-update-3.sh
-log "pre-commit config: $build_version"
+source .husky/shell/config-update.sh
+log "pre-commit config: $build_type $build_version $build_time"
 
-# task done
+log "Modify docker-compose.yml"
+sh .husky/shell/compose-modify.sh
+
+# sed -i '' -E "s/助贷系统v[0-9]+\.[0-9]+\.[0-9]+/助贷系统v$build_version/g" ./php/application/admin/view/auth.index.html
+# git add "./php/application/admin/view/auth.index.html"
+
 ent_time=$(date +%s)
 log "🎉Success pre-commit hook. Time elapsed: $((ent_time-start_time))s"
-
-# MajorVersion.MinorVersion.PatchVersion
-# pre-commit: 更新build_config.yaml文件,将第3段的PatchVersion+1

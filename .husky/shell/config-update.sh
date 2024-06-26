@@ -3,7 +3,7 @@ source ./.husky/shell/config-read.sh
 
 # shellcheck disable=SC2034
 start_time=$(date +%s)
-
+log "config-update.sh 开始执行"
 
 # shellcheck disable=SC2154
 IFS='.' read -r -a version_parts <<< "$build_version"
@@ -16,7 +16,6 @@ log "New build time: $new_build_time"
 yq e -i ".build_version = \"$new_build_version\"" "$FILE"
 yq e -i ".build_time = \"$new_build_time\"" "$FILE"
 yq e -i ".build_type = \"dev\"" "$FILE"
-echo "Updated version to $new_build_version and build time to $new_build_time"
 git add "$FILE"
 
 build_version=$new_build_version
@@ -24,4 +23,4 @@ build_time=$new_build_time
 build_type="dev"
 
 ent_time=$(date +%s)
-echo "$0 执行完成,耗时：$((ent_time-start_time))s"
+log "config-update.sh 执行完成,耗时：$((ent_time-start_time))s"
