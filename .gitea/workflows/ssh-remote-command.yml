@@ -6,9 +6,9 @@ on:
       - fishyer
 
 env:
-  GIT_REMOTE: git@git.fishyer.com:fishyer/crm-pengqi.git
+  GIT_REMOTE: git@git.fishyer.com:fishyer/ezdida.git
   GIT_BRANCH: fishyer
-  PROJECT_PATH: /app/crm-pengqi
+  PROJECT_PATH: /app/ezdida
 
 jobs:
   ssh-remote-commands:
