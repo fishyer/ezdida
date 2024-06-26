@@ -8,8 +8,8 @@ log "✅Running post-push hook..."
 source ./.husky/shell/config-read.sh
 log "post-push config: $build_type $build_version $build_time"
 
-# log "Apply docker-compose.yml"
-# sh ./.husky/shell/compose-apply.sh
+log "Apply docker-compose.yml"
+sh ./.husky/shell/compose-apply.sh
 
 ent_time=$(date +%s)
 log "🎉Success post-push hook. Time elapsed: $((ent_time-start_time))s"
