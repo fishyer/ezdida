@@ -9,8 +9,8 @@ source ./.husky/shell/config-read.sh
 log "pre-push config: $build_type $build_version $build_time"
 
 # 后续可以考虑在pre-push中,在本地生成docker镜像,并推送到远程仓库,以实现远程部署
-log "Build docker-compose.yaml"
-sh ./.husky/shell/compose-build.sh
+# log "Build docker-compose.yaml"
+# sh ./.husky/shell/compose-build.sh
 
 # done
 ent_time=$(date +%s)

@@ -1,5 +1,5 @@
-build_version: "2.1.9"
-build_time: "2024-07-05 12:06:54"
+build_version: "2.1.10"
+build_time: "2024-07-05 12:09:51"
 build_type: dev
 harbor_url: "104.168.59.18:25080"
 harbor_library: "library"

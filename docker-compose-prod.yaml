@@ -10,7 +10,7 @@
 services:
   server:
     restart: always
-    image: 104.168.59.18:25080/library/ezdida-server:2.1.9
+    image: 104.168.59.18:25080/library/ezdida-server:2.1.10
 # cd /app/ezdida
 # docker-compose -f ./docker-compose.yaml down
 # docker-compose -f ./docker-compose.yaml up -d --build
