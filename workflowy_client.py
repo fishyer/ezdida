@@ -6,12 +6,14 @@ import uuid
 import frontmatter
 import urllib3
 import decorator_util
-from ezlogger import print, warning, info
+from fish_util.src.loguru_util  import print, warning, info
+from fish_util.src  import decorator_util
 import os
 import env_client
 import jina_client
 import cloudreve_client
 import shutil
+
 
 # import jianguoyun_client
 
@@ -82,7 +84,7 @@ def process_workflowy_node(node: Node):
     dida_title, dida_url = preprocess(node.name, node.description)
     # print(f"Processing node: {node.name} {dida_title} {dida_url}")
     if dida_url:
-        info(f"✅Process {dida_title} {dida_url}...")
+        info(f"✅Process: {dida_title} {dida_url}...")
         # 获取Jina的markdown内容
         jina_title, jina_url, content = jina_client.get_markdown_by_url(dida_url)
         # 添加ob笔记
@@ -102,12 +104,12 @@ def process_workflowy_node(node: Node):
         if not os.path.exists(local_folder):
             os.makedirs(local_folder, exist_ok=True)
         # 再检查本地缓存文件是否存在，存在则跳过
-        if os.path.exists(local_path):
-            info(f"Local cache file {local_path} exists, skip.")
-            add(node, obsidian_link)
-            node.complete()
-            completed_node_set.add(node.name)
-            return
+        # if os.path.exists(local_path):
+        #     info(f"Local cache file {local_path} exists, skip.")
+        #     add(node, obsidian_link)
+        #     node.complete()
+        #     completed_node_set.add(node.name)
+        #     return
         remote_path = f"/{cloudreve_client.remote_folder}/{simple_title}.md"
         with open(local_path, "w") as f:
             f.write(fm_content)

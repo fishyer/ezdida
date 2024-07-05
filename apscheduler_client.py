@@ -1,6 +1,6 @@
 from apscheduler.schedulers.background import BackgroundScheduler
 import time
-from ezlogger import print, debug, error, warning, info
+from fish_util.src.loguru_util  import print, warning, info
 from workflowy_client import init_wf, refresh_inbox, dida2wf, wf2ob
 import logging
 

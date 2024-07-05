@@ -56,6 +56,7 @@ def sanitize_title_for_filename(title):
 
 
 def get_markdown_by_url(src_url):
+    src_url=src_url.replace("http://", "https://")
     jina_url = f"https://r.jina.ai/{src_url}"
     webpage_content = request_content(jina_url)
     title, url_source, markdown_content = extract_info_from_content(webpage_content)
@@ -238,7 +239,10 @@ def main():
     # print(f"Total {len(urls)} links, split into {len(chunked_lists)} chunks")
     # for i, chunk in enumerate(chunked_lists):
     #     print(f"Processing chunk {i+1}/{len(chunked_lists)}")
-    get_links_from_mdfile()
+    # get_links_from_mdfile()
+    test_url="https://r.jina.ai/https://mp.weixin.qq.com/s?__biz=MzkxOTY2MTgzNA==&mid=2247485544&idx=1&sn=157bd5a25be034db9c96565079c57819&chksm=c19ff40df6e87d1ba95056e3d54b6ef0a8b6abe6771981c5b79f39e5b7c88e817ead03cc88ce&mpshare=1&scene=1&srcid=07055Ke5ejhYg8iDZ2CajSLT&sharer_shareinfo=b16238b1ebd26f3b61775044a4e063ac&sharer_shareinfo_first=b16238b1ebd26f3b61775044a4e063ac#rd"
+    rc=request_content(test_url)
+    print(f"rc:{rc}")
 
 
 if __name__ == "__main__":

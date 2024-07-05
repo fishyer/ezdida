@@ -12,6 +12,9 @@ services:
     build:
       context: .
     restart: always
+# cd /app/ezdida
+# docker-compose -f ./docker-compose.yaml down
+# docker-compose -f ./docker-compose.yaml up -d --build
     # logging:
     #   driver: loki
     #   options:

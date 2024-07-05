@@ -4,7 +4,7 @@ import json
 from urllib import parse
 import pydantic
 from typing import Optional
-from ezlogger import print, logger
+from fish_util.src.loguru_util  import print, warning, info
 
 
 class DidaTask(pydantic.BaseModel):
